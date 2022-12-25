@@ -5,3 +5,84 @@
 8 4 2 4
 Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 */
+
+int GetNumber(string message)
+{
+    int result;
+
+    while(true)
+    {
+        Console.WriteLine(message);
+        if(int.TryParse(Console.ReadLine(), out result))
+        {
+            break;
+        }
+        else
+        {
+            Console.WriteLine("Ввели не число");
+        }
+    }
+    return result;
+}
+
+int[,] InitMatrix(int m, int n)
+{
+    int[,] matrix = new int[m,n];
+    Random rnd = new Random();
+
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+        matrix[i,j] = rnd.Next(1,10);
+        }
+    }
+    return matrix;
+}
+
+void PrintArray(int[,] matrix)
+{
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+             Console.Write($"{matrix[i,j]} ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+void PrintNewArray(double[] array)
+{
+    for (int i = 0; i < array.Length ; i++)
+    {
+            Console.Write($"{array[i]}; ");
+    }
+    Console.WriteLine();
+}
+
+double[] GetAverageArray(int[,] array)
+{
+    double[] averageColumns = new double[array.GetLength(0)];
+
+    for (int j = 0; j < array.GetLength(0); j++)
+    {
+        for (int i = 0; i < array.GetLength(1); i++)
+        {
+           averageColumns[j] = averageColumns[j] + array[i, j];
+        }
+        averageColumns[j] = averageColumns[j] / array.GetLength(0);
+    }
+
+    return averageColumns;
+}
+
+
+int m = GetNumber("Введите количество строк");
+int n = GetNumber("Введите количество столбцов");
+Console.WriteLine();
+int[,] matrix = InitMatrix(m, n);
+PrintArray(matrix);
+double [] average = GetAverageArray(matrix);
+PrintNewArray(average);
