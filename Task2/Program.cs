@@ -7,3 +7,68 @@
 17 -> такого числа в массиве нет
 */
 
+int GetNumber(string message)
+{
+    int result;
+
+    while(true)
+    {
+        Console.WriteLine(message);
+        if(int.TryParse(Console.ReadLine(), out result))
+        {
+            break;
+        }
+        else
+        {
+            Console.WriteLine("Ввели не число");
+        }
+    }
+    return result;
+}
+
+int[,] InitMatrix(int m, int n)
+{
+    int[,] matrix = new int[m,n];
+    Random rnd = new Random();
+
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+        matrix[i,j] = rnd.Next(1,10);
+        }
+    }
+    return matrix;
+}
+
+void PrintArray(int[,] matrix)
+{
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+             Console.Write($"{matrix[i,j]} ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+string GetSearchNumber(int[,] array, int x, int y)
+{
+    if (x >= array.GetLength(0) || y >= array.GetLength(1))
+    {
+        return "Tакого элемента в массиве нет";
+    }
+    else
+        return $"{array[x, y]} ";
+}
+
+
+int m = GetNumber("Введите количество строк");
+int n = GetNumber("Введите количество столбцов");
+int[,] matrix = InitMatrix(m, n);
+PrintArray(matrix);
+int x = GetNumber("Введите x позицию элемента");
+int y = GetNumber("Введите y позицию элемента");
+Console.WriteLine($"Значение элемента равно {GetSearchNumber(matrix, x, y)}");
