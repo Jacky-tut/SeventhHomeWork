@@ -33,7 +33,7 @@ double[,] InitMatrix(int m, int n)
     {
         for (int j = 0; j < matrix.GetLength(1); j++)
         {
-        matrix[i,j] = rnd.NextDouble() * 100;
+        matrix[i,j] = rnd.NextDouble() * 10;
         }
     }
     return matrix;
